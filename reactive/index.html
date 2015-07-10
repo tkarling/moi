@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<title>Reactive</title>
+	</head>
+	<body>
+		<header>
+			<div class="item letterLogo">M</div>
+			<div class="rightRow">
+			<div class="row">
+				<img class="item optImg" src="https://medium2.global.ssl.fastly.net/fit/c/64/64/1*bs9PbxDndAW7mmqve3EQ-w.jpeg"/>
+				<div class="item imgText optAt800">PUBLISHED IN<br> React Tutorials</div>
+				<div class="item searchBox">
+				<img class="icon" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-32.png"/></div>
+				<div class="item button smallText">Sign In/ Sign Up</div>
+			</div>
+			</div>
+		</header>
+
+		<section>
+			<h1>React Components</h1>
+			<p>Components are the smallest, yet most fundamental part of React. They’re similar, in concepts, to things like widgets and modules. React defines itself as a library for building user interfaces. As such, when you think of a user interface you want to build (with React), you need to think of it in terms of the smallest possible components that you can define.
+			</p>
+
+			<p>These components include code which defines how DOM elements are created and how users can interact with them. Components can be defined purely in JavaScript or they can be defined in a superset (or extended variation) of JavaScript called JSX. If you decide to use JSX for your component definitions, you may also need a compiler application, but we’ll get to that in a minute.
+			</p>
+
+			<h2>Embedded HTML</h2>
+
+			<p>If you’ve been developing websites for a while, you may have flinched when I spoke about using HTML within your JavaScript. For the longest time, a development paradigm has existed which says that you should split HTML and JavaScript. Words like unobtrusive have been repurposed to express this kind of separation. That is exactly how I felt, until I started working with React.
+			</p>
+
+			<p>The reason this paradigm exists is to decrease coupling (how much things depend on each other) and increase cohesion (how well different things work together). So we have created an environment in which we try our best to make HTML (and templates) as free of logic as possible. We then need to attach behaviour to this in the form of external scripts.
+			</p>
+
+			<p>There are trade-offs with this approach to doing things. For starters, it takes more effort trying to keep these two things separate. There are many template engines and languages. There are also many template parsers to handle them all. And yet these languages (with the exception of HTML) still seem to include a modicum of logical operations…
+			</p>
+
+			<p>Additionally, when we need to modify the contents of a web page, via JavaScript, we have to know about HTML and/or templates. How else can we know what to display and where to display it? We could load external templates, via additional HTTP requests, but how would we know where to put it without some knowledge of the DOM? We could load templates embedded within special script tags, but we would first need to fetch the contents of those script tags.
+			</p>
+
+			<p>This brings us to the biggest problem with the separation of HTML and JavaScript: The only way we can get elements to attach behaviour to, and read data from, is by knowing about HTML elements in the document. Libraries like jQuery are built around the idea that HTML elements are only a CSS selector away from JavaScript.
+			</p>
+		</section>
+
+		<footer>
+			<div class="row footerRow">
+				<div class="item person smallText optAt800">
+					<img  src="https://medium2.global.ssl.fastly.net/fit/c/64/64/1*bs9PbxDndAW7mmqve3EQ-w.jpeg"/>
+					<img src="https://medium2.global.ssl.fastly.net/fit/c/64/64/1*oZu4yGg3LiS4YBe_HnOKew.jpeg"/>
+					<span id="who">Christopher Pitt on Jan 14, 20146 min</span>
+				</div>
+				<div class="item smallText optAt800">Juvoni Beckford and 50 others recommended</div>
+				<img class="item icon" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-heart-outline-32.png"/>
+				<img class="item icon" src="https://cdn4.iconfinder.com/data/icons/miu/22/common_bookmark-32.png"/>
+				<img class="item icon" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/upload-32.png"/>				<div class="item button nextButton smallText">NEXT STORY</div>
+			</div>
+		</footer>
+	</body>
+</html>

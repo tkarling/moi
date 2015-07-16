@@ -1,0 +1,1 @@
+https://github.com/DevMountain/jQuery2/blob/master/README.md

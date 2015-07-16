@@ -1,0 +1,12 @@
+body {
+	background-color: lightblue;
+}
+
+.panel {
+    display: inline-block;
+    width: 30%;
+}
+
+.new-item-header::after {
+	clear:both;
+}

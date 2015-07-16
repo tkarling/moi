@@ -136,8 +136,8 @@ var count = 0;
 function assert_chop(expectedResult, no, arr) {
 	// var result = chop1(no, arr);
 	// var result = chop2(no, arr);
-	var result = chop3(no, arr);
-	// var result = binarySearch( arr, no );
+	// var result = chop3(no, arr);
+	var result = binarySearch( arr, no );
 
 	// console.log('exp, res: ', expectedResult, result);
 	if(expectedResult !== result) {

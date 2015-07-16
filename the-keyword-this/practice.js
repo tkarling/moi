@@ -57,14 +57,25 @@ function moveCar () {
 }  
 
 var Car = function (make, model, year) {
-  var myCar = {};
-  myCar.make = make;
-  myCar.model = model;
-  myCar.year = year;
-  myCar.move = 0;
-  myCar.moveCar = moveCar;
-  return myCar;
-}
+  return {
+    make: make,
+    model: model,
+    year: year,
+    move: 0,
+    moveCar: moveCar
+  };
+};
+ 
+
+// var Car = function (make, model, year) {
+//   var myCar = {};
+//   myCar.make = make;
+//   myCar.model = model;
+//   myCar.year = year;
+//   myCar.move = 0;
+//   myCar.moveCar = moveCar;
+//   return myCar;
+// }
 
 var prius = Car('Toyota', 'Prius', 2011);
 var mustang = Car('Ford', 'Mustang', 2013);
@@ -91,11 +102,13 @@ var getYear = function(){
 //the mustang objects being the focal objects. *Don't add getYear as a property on both objects*.
 
   //Code Here
-  prius.getYear = getYear.bind(prius);
-  console.log('prius.getYear()', prius.getYear());
-  mustang.getYear = getYear.bind(mustang);
-  console.log('mustang.getYear()', mustang.getYear());
+  // prius.getYear = getYear.bind(prius);
+  // console.log('prius.getYear()', prius.getYear());
+  // mustang.getYear = getYear.bind(mustang);
+  // console.log('mustang.getYear()', mustang.getYear());
 
+  console.log(getYear.call(prius));
+  console.log(getYear.call(mustang));
 
 
 //New Problem

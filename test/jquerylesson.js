@@ -60,3 +60,47 @@ $('body').on('click', '.js-add', function() {
 $('body').on('click', '.js-remove', function() {
     $(this).closest('li').remove();
 });
+
+
+
+// 2nd day
+var promise = $.ajax({
+        method: 'GET',
+        url: 'http://randomuser.me/api/0.6/...'  // not full url
+    }).then(function(data) {
+        console.log('type:', typeof data);
+        console.log(data);
+    })
+});
+
+var promise = $.ajax({
+        method: 'GET',
+        url: 'http://githubusercontent.com/...',  // not full url
+        // explicit as github send with text/plain
+        dataType: 'json'
+    }).then(function(data) {
+        console.log('type:', typeof data);
+        console.log(data);
+        // JSON.parse/ JSON.stringify
+    })
+});
+
+
+// CORS - Cross-Origin Resource Sharing
+// needs a server without
+
+// CRUD
+// C - Create
+// R - Read
+// U - Update
+// D - Destroy
+
+// GET     /api/users      - index
+// GET     /api/users/42   - get one
+// POST    /api/users/42   - update one
+// POST    /api/users/new   - create
+// POST    /api/users      - update many
+// delete  /api/users/42   - delete one
+
+
+

@@ -30,8 +30,16 @@ angular.module('quotesApp').service('quotesService', function($window) {
     var quotes = [];
 
     var updateStrorage = function() {
+        // console.log('updateStrorage quotes: ', quotes)
+        var storeQuotes = quotes.slice();
+        for(var i = 0; i < storeQuotes.length; i++) {
+            if(storeQuotes[i].$$hashKey) {
+                delete storeQuotes[i].$$hashKey;
+            }
+        }
+        // console.log('updateStrorage storeQuotes: ', storeQuotes)
     	var quotesAsString = JSON.stringify(quotes);
-    	console.log('updateStrorage: quotesAsString', quotesAsString);
+    	// console.log('updateStrorage: quotesAsString', quotesAsString);
     	localStorage.setItem('quotes', quotesAsString);
     };
 
@@ -40,7 +48,7 @@ angular.module('quotesApp').service('quotesService', function($window) {
     	if(quotes.length === 0) {
     		quotes = defaultQuotes;
     	}
-    	console.log(quotes);
+    	// console.log(quotes);
     	return quotes;
     };
 
@@ -55,8 +63,8 @@ angular.module('quotesApp').service('quotesService', function($window) {
 	            text: text,
 	            author: author
 	        });        	
+	        setTimeout(updateStrorage(), 50000);
         }
-        updateStrorage();
     };
 
 

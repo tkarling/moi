@@ -8,11 +8,12 @@
 		<h1>{{ title }}</h1>
 		<p>
 			<input type="text" ng-model="myFilter" placeholder="search"/>
+			<button ng-click = "showAdd = true">+</button>
 		</p>
-		<p>
+		<p ng-show="showAdd">
 			<input type="text" ng-model="newAuthor" placeholder="author"/>
 			<input type="text" ng-model="newText" placeholder="quote"/>
-			<button ng-click="addQuote()">Add</button>
+			<button ng-click = "addQuote()">Add</button>
 		</p>
 		<ul>
 			<li ng-repeat = "quote in quotes | filter: myFilter">

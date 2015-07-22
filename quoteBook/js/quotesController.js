@@ -6,13 +6,16 @@ angular.module('quotesApp').controller('quotesController',
 	$scope.quotes = quotesService.getData();
 
 	$scope.addQuote = function () {
-		console.log("$scope.newText", $scope.newText);
+		// console.log("$scope.newText", $scope.newText);
 		quotesService.addData($scope.newText, $scope.newAuthor);
 		$scope.newText = "";
 		$scope.newAuthor = "";
+		$scope.showAdd = false;
 	} 
 
 	$scope.deleteQuote = function(quote) {
 		quotesService.removeData(quote);
 	}
+
 });
+

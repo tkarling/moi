@@ -1,0 +1,99 @@
+<html>
+
+<head>
+    <title>FB Chat App</title>
+</head>
+
+<body ng-app="firebaseChat" ng-controller="chatCtrl" style="background-color: {{ chatroom.color}};">
+    <div>
+        <h1>FB Chat App</h1>
+    </div>
+    <div>
+        <form>
+            <fieldset>
+                <input type="text" placeholder="chat room name" ng-model="chatroom.name">
+                <input type="text" placeholder="chat room color" ng-model="chatroom.color">
+                <input type="date" placeholder="chat room date" ng-model="chatRoomDate" ng-change="setDate(chatRoomDate)">
+            </fieldset>
+        </form>
+    </div>
+    <div>
+        <form>
+            <fieldset>
+                <input type="text" placeholder="username" ng-model="username">
+                <textarea placeholder="Next Chat ..." ng-model='newChatText'></textarea>
+                <button ng-click="sendChat(username, newChatText)">Send</button>
+            </fieldset>
+        </form>
+    </div>
+    <div>
+        <h4>These are the chats</h4>
+        <ul>
+            <li ng-repeat="chat in chats">
+                <strong>{{ chat.username }}</strong>
+                <span>{{ chat.text }}
+            	<button ng-click="removeChat(chat)">Delete</button>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
+    <script type="text/javascript">
+    	angular.module('firebaseChat', ['firebase'])
+    	.controller('chatCtrl', function($scope, $firebaseArray, $firebaseObject) {
+    		var fbRoot = "https://blinding-heat-8535.firebaseio.com/fbChat",
+    		rootRef = new Firebase(fbRoot),
+    		root = $firebaseObject(rootRef),
+    		chatsRef = new Firebase(fbRoot + '/chats'),
+    		chats = $firebaseArray(chatsRef),
+    		chatRoomRef = new Firebase(fbRoot + '/chatroom'),
+    		chatRoom = $firebaseObject(chatRoomRef);
+
+    		$scope.chats = chats;
+
+    		chatRoom.$loaded().then(function(loadedRoot) {
+	    		console.log('chatRoom', chatRoom, chatRoom.color);
+	    		$scope.chatRoomDate = new Date(chatRoom.date);
+	    		console.log('$scope.chatRoomDate', $scope.chatRoomDate);
+			});
+			
+    		chatRoom.$bindTo($scope, 'chatroom');
+
+    		// console.log('not loaded chats in Root', root.chats);
+    		// root.$loaded().then(function(loadedRoot) {
+    		// 	console.log('loadedRoot', loadedRoot);
+    		// });
+
+    		$scope.sendChat = function(username, newChatText) {
+    			chats.$add({
+    				username: username,
+    				text: newChatText
+    			});
+    			$scope.username = "";
+    			$scope.newChatText = "";
+    		};
+    		$scope.removeChat = function(chat) {
+    			chats.$remove(chat);
+    		};
+
+    		$scope.destroyAllChats = function() {
+    			root.$remove();
+    		};
+
+    		$scope.setDate = function(chatroomDate) {
+    			chatRoom.date = chatroomDate.toString();
+    			chatRoom.$save();
+    			console.log('chatroomDate', chatroomDate)
+    			console.log('chatRoom', chatRoom)
+    		};
+    	})
+    </script>
+</body>
+
+</html>

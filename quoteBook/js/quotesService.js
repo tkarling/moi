@@ -31,24 +31,36 @@ angular.module('quotesApp').service('quotesService', function($window) {
 
     var updateStrorage = function() {
         // console.log('updateStrorage quotes: ', quotes)
-        var storeQuotes = quotes.slice();
-        for(var i = 0; i < storeQuotes.length; i++) {
-            if(storeQuotes[i].$$hashKey) {
-                delete storeQuotes[i].$$hashKey;
-            }
-        }
-        // console.log('updateStrorage storeQuotes: ', storeQuotes)
-    	var quotesAsString = JSON.stringify(quotes);
-    	// console.log('updateStrorage: quotesAsString', quotesAsString);
-    	localStorage.setItem('quotes', quotesAsString);
+     //    var storeQuotes = quotes.slice();
+     //    for(var i = 0; i < storeQuotes.length; i++) {
+     //        if(storeQuotes[i].$$hashKey) {
+     //            delete storeQuotes[i].$$hashKey;
+     //        }
+     //    }
+     //    // console.log('updateStrorage storeQuotes: ', storeQuotes)
+    	// var quotesAsString = JSON.stringify(quotes);
+    	// // console.log('updateStrorage: quotesAsString', quotesAsString);
+    	// localStorage.setItem('quotes', quotesAsString);
+
+        $window.localStorage['quotes'] = JSON.stringify(quotes);
+
+        // var quotesAsString = angular.fromJson(quotes);
+        // $window.localStorage.setItem('quotes', quotesAsString);
     };
 
     var readStorage = function() {
-    	quotes = JSON.parse(localStorage.getItem('quotes')) || [];
-    	if(quotes.length === 0) {
-    		quotes = defaultQuotes;
-    	}
-    	// console.log(quotes);
+    	// quotes = JSON.parse(localStorage.getItem('quotes')) || [];
+
+        var srt = $window.localStorage['quotes'] || "";
+        // quotes = JSON.parse($window.localStorage['quotes'] || "");
+        // console.log('1', quotes);
+
+
+    	// // if(angular.isUndefined(quotes) || quotes === null) {
+     // //        console('hello');
+    	// 	quotes = defaultQuotes;
+    	// // }
+    	// console.log('2', quotes);
     	return quotes;
     };
 
@@ -62,8 +74,9 @@ angular.module('quotesApp').service('quotesService', function($window) {
 	        quotes.unshift({
 	            text: text,
 	            author: author
-	        });        	
-	        setTimeout(updateStrorage(), 50000);
+	        });     
+            updateStrorage();
+	        // setTimeout(updateStrorage(), 50000);
         }
     };
 

@@ -1,0 +1,26 @@
+        <form name="loginForm" ng-if="!authData">
+            <fieldset>
+                <input type="email" ng-model="loginUser.email" placeholder="Email..." required>
+                <input type="password" ng-model="loginUser.password" placeholder="Password..." required>
+                <br>
+                <button ng-click="login(loginUser)" ng-disabled="loginForm.$invalid">Login</button>
+                <button ng-click="register(loginUser)" ng-disabled="loginForm.$invalid">Register</button>
+                <button ng-click="reset(loginUser)">Reset Password</button>
+                <button ng-click="googlePlus()">Sign in with Google +</button>
+            </fieldset>
+        </form>
+        <div ng-if="authData">
+            <!-- <span>Logged in as: {{ authData.uid }}</span>
+            <button ng-click="authObj.$unauth()">Log Out</button> -->
+            <form name="userForm">
+                <fieldset>
+                    <input type="text" ng-model="user.name" placeholder="Name...">
+                    <input type="date" ng-model="birthday" placeholder="Birthday..." ng-change="setBirthday(birthday)">
+                    <input type="email" ng-model="email" placeholder="Email...">
+                    <input type="password" ng-model="oldPassword" placeholder="Old password...">
+                    <input type="password" ng-model="newPassword" placeholder="New password...">
+                    <input type="password" ng-model="newPasswordConfirmed" placeholder="New password again...">
+                    <button ng-click="changePassword(email, oldPassword, newPassword, newPasswordConfirmed);">Change Passwword</button>
+                </fieldset>
+            </form>
+        </div>

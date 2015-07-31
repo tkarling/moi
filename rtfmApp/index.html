@@ -5,11 +5,10 @@
     <title>rtfm App</title>
 </head>
 
-<body>
+<body ng-controller="AuthController">
+    <span ng-if="authData">Logged in as: {{ authData.uid }}</span>
+    <button ng-if="authData" ng-click="logout()">Log Out</button>
     <h1>RTFM App</h1>
-
-
-
     <div class="container" ng-view></div>
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
@@ -22,7 +21,7 @@
     <script src="./js/threads/threadsCtrl.js"></script>
     <script src="./js/threads/threadsService.js"></script>
     <script src="./js/thread/threadCtrl.js"></script>
-
+    <script src="./js/auth/authCtrl.js"></script>
 </body>
 
 </html>

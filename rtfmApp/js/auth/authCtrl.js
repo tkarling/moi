@@ -24,7 +24,7 @@ angular.module("myApp")
                     if (user.birthday) {
                         $scope.birthday = new Date(user.birthday);
                     }
-                    $location.path("/threads");
+                    // $location.path("/threads");
                 });
             }
         });

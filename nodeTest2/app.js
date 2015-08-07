@@ -1,7 +1,7 @@
 module.exports.create = function() {
     var express = require('express');
     var app = express();
-    var staticServer = express.static(__dirname + "/public");
+    var staticServer = express.static(__dirname + '/public');
     var bodyParser = require("body-parser");
 
     function handler(req, res) {
@@ -14,6 +14,11 @@ module.exports.create = function() {
     	next();
     }
 
+    // function getFriend(req, res) {
+    //     var name = "friend";
+    //     res.send({ message: "hello " + name});
+    // }
+
     function getMessage(req, res) {
     	var name = req.params.name || "friend";
     	res.send({ message: "hello " + name});
@@ -24,6 +29,7 @@ module.exports.create = function() {
     app.use("/api", bodyParser.json()); //good
     // bodyParser.urlencoded()   volnerable (angular OK)
 
+    app.get("/api/messages/", getMessage);
     app.get("/api/messages/:name", getMessage);
     app.post("/api/messages", handler);
     app.delete("/api/messages", handler);

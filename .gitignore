@@ -46,3 +46,7 @@ Temporary Items
 nodeTest2/node_modules/*/*
 nodeTest2/node_modules/*/*/*.*
 nodeTest2/node_modules/*/*/*/*.*
+
+chatty3/node_modules/*/*
+chatty3/node_modules/*/*/*.*
+chatty3/node_modules/*/*/*/*.*

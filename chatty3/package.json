@@ -1,0 +1,25 @@
+{
+  "name": "chatty2",
+  "version": "1.0.0-alpha",
+  "description": "chatty w express",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkarling/chatty.git"
+  },
+  "author": "Tuija",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tkarling/chatty/issues"
+  },
+  "homepage": "https://github.com/tkarling/chatty#readme"
+}

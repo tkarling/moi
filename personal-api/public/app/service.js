@@ -26,10 +26,28 @@ angular.module("myApp")
             });
         };
 
+        this.setMyName = function(name) {
+            return $http.put(url + "/name/" + name);
+        };
+
+        this.setMyLocation = function(location) {
+            return $http.put(url + "/location/" + location);
+        };
+
         this.getMyHobbies = function(sort) {
             var sendUrl = url + "/hobbies?order=" + sort;
             // console.log("getMyHobbies: sendUrl", sendUrl);
             return $http.get(sendUrl).then(function(response) {
+                return response.data;
+            });
+        };
+
+        this.addHobby = function(newHobby, sort) {
+            var sendUrl = url + "/hobbies?order=" + sort;
+            // console.log("addHobby: sendUrl", sendUrl);
+            return $http.post(sendUrl, {
+                hobby: newHobby
+            }).then(function(response) {
                 return response.data;
             });
         };
@@ -42,11 +60,29 @@ angular.module("myApp")
             });
         };
 
+        this.addOccupation = function(newOccupation, sort) {
+            var sendUrl = url + "/occupations?order=" + sort;
+            // console.log("addHobby: sendUrl", sendUrl);
+            return $http.post(sendUrl, {
+                occupation: newOccupation
+            }).then(function(response) {
+                return response.data;
+            });
+        };
+
         this.getMySkills = function(skillLevel) {
             var sendUrl = (skillLevel === "all") ? url + "/skills" : url + "/skills?experience=" + skillLevel;
             // console.log("getMySkills: sendUrl", sendUrl);
             return $http.get(sendUrl).then(function(response) {
                 // console.log("this.getMySkills", response.data);
+                return response.data;
+            });
+        };
+
+        this.addSkill = function(newSkill) {
+        	// console.log("this.addSkill", newSkill);
+            return $http.post(url + "/skills", newSkill).then(function(response) {
+            	// console.log("this.addSkill", response);
                 return response.data;
             });
         };

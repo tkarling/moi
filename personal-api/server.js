@@ -87,37 +87,36 @@ function adSort(arr, order) {
 };
 
 // hobbies
-app.get('/api/hobbies', function(req, res) {
+app.route('/api/hobbies')
+.get(function(req, res) {
     // ?order=desc, ?order=asc
     console.log("/hobbies", req.params, req.query);
     adSort(hobbies, req.query.order);
     res.json(hobbies);
     // res.send(JSON.stringify(hobbies));
-});
-
-app.post('/api/hobbies', function(req, res) {
+})
+.post(function(req, res) {
+    // ?order=desc, ?order=asc
+    console.log("POST /hobbies", req.body);
     hobbies.push(req.body.hobby);
+    adSort(hobbies, req.query.order);
     res.json(hobbies);
     // res.send(JSON.stringify(hobbies));
 });
 
 
 // occupations
-app.get('/api/occupations', function(req, res) {
+app.route('/api/occupations')
+.get(function(req, res) {
     // ?order=desc, ?order=asc
     adSort(occupations, req.query.order);
-    // if (req.query.order === "desc") {
-    //     occupations.sort();
-    // } else if (req.query.order === "asc") {
-    //     occupations.sort();
-    //     occupations.reverse();
-    // }
     res.json(occupations);
     // res.send(JSON.stringify(occupations));
-});
-
-app.post('/api/occupations', function(req, res) {
+})
+.post(function(req, res) {
+    // ?order=desc, ?order=asc
     occupations.push(req.body.occupation);
+    adSort(occupations, req.query.order);
     res.json(occupations);
     // res.send(JSON.stringify(occupations));
 });
@@ -146,14 +145,14 @@ function getSelectedSkills(experience) {
     return skills;
 }
 
-app.get('/api/skills', function(req, res) {
+app.route('/api/skills')
+.get(function(req, res) {
     // ?experience=Intermediate
     console.log("/skills", req.params, req.query);
     res.json(getSelectedSkills(req.query.experience));
     // res.send(JSON.stringify(getSelectedSkills(req.query.experience)));
-});
-
-app.post('/api/skills', function(req, res) {
+})
+.post(function(req, res) {
     skills.push(req.body);
     res.json(skills);
     // res.send(JSON.stringify(skills));
@@ -171,7 +170,7 @@ var port = 8686;
 server.on("request", app);
 
 server.listen(port, function() {
-    console.log("listening in address: ", server.address());
+    console.log("listening in address: ", server.address(), new Date().toString());
 });
 
 

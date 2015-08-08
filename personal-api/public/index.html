@@ -8,14 +8,15 @@
 <body ng-app="myApp">
     <div ng-controller="MyController">
         <p>Hello here {{test}} {{serviceTest}} </p>
-        <!-- <form> -->
         <div>
             <span>Name: </span>
             <input type="text" ng-model="me.name">
+            <button ng-click="setMyName()">Save</button>
         </div>
         <div>
             <span>Location: </span>
             <input type="text" ng-model="me.location">
+            <button ng-click="setMyLocation()">Save</button>
         </div>
         <div>
             <h5>My Hobbies:</h5>
@@ -26,6 +27,10 @@
                     <option value="desc">Desc</option>
                 </select>
             </div>
+            <form ng-submit="addHobby()">
+                <span>Add Hobby: </span>
+                <input type="text" placeholder="new hobby" ng-model="newHobby">
+            </form>
             <ul>
                 <li ng-repeat="hobby in hobbies">
                     {{hobby}}
@@ -41,6 +46,10 @@
                     <option value="desc">Desc</option>
                 </select>
             </div>
+            <form ng-submit="addOccupation()">
+                <span>Add Occupation: </span>
+                <input type="text" placeholder="new occupation" ng-model="newOccupation">
+            </form>
             <ul>
                 <li ng-repeat="occupation in occupations">
                     {{occupation}}
@@ -61,15 +70,23 @@
                     <option>Intermediate</option>
                     <option>Advanced</option>
                 </select>
-            </div>  
-            <p ng-if="skills.data.length === 0">No Skills at this level</p>          
+            </div>
+            <form ng-submit="addSkill()">
+                <span>Add Skill: </span>
+                <input type="text" placeholder="new skill" ng-model="newSkill.name">
+                <select ng-model="newSkill.experience">
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+            </form>
+            <p ng-if="skills.data.length === 0">No Skills at this level</p>
             <ul>
                 <li ng-repeat="skill in skills.data">
                     Skill: {{skill.name}}, Level: {{skill.experience}}
                 </li>
             </ul>
         </div>
-        <!-- </form> -->
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
     <script src="./app/app.js"></script>

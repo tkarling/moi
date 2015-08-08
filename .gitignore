@@ -54,3 +54,6 @@ chatty3/node_modules/*/*/*/*.*
 personal-api/node_modules/*/*
 personal-api/node_modules/*/*/*.*
 personal-api/node_modules/*/*/*/*.*
+
+*/*.log
+personal-api/*.log

@@ -1,9 +1,37 @@
 'use strict';
+var http = require("http");
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
+var server = http.createServer();
+var staticServer = express.static(__dirname + '/public');
 var app = express();
 
+app.use("/", staticServer);
+app.use("/", bodyParser.json());
+app.use("/", cors());
+
+
+// NOTE use cors or following to make e.g. chrome work
+// var allowCrossDomain = function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     if("OPTIONS" === req.method) {
+//         res.send(200);
+//     } else {
+//         next();
+//     }
+// }
+// app.use("/", allowCrossDomain);
+// OR headers from above & following
+// app.options('/', function(req, res) {
+//     res.send();
+// });
+
+
+// DATA =========
 var hobbies = ["hiking", "reading", "puzzles"];
 var occupations = ["Project Manager", "SW Team Lead", "Customer Trainer", "SW developer"];
 var skills = [{
@@ -26,80 +54,85 @@ var me = {
     location: "San Diego, CA",
     latestOccupation: occupations[0]
 };
+// END DATA =========
 
-
-
-app.use(bodyParser.json());
-app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
-
-app.get('/name', function(req, res) {
+// name
+app.get('/api/name', function(req, res) {
     res.send(me.name);
 });
 
-app.put('/name/:name', function(req, res) {
+app.put('/api/name/:name', function(req, res) {
     me.name = req.params.name;
     res.send(me.name);
 });
 
 
-app.get('/location', function(req, res) {
+// location
+app.get('/api/location', function(req, res) {
     res.send(me.location);
 });
 
-app.put('/location/:location', function(req, res) {
+app.put('/api/location/:location', function(req, res) {
     me.location = req.params.location;
     res.send(me.location);
 });
 
 
-app.get('/hobbies', function(req, res) {
+function adSort(arr, order) {
+    if (order === "asc") {
+        arr.sort();
+    } else if (order === "desc") {
+        arr.sort().reverse();
+    }    
+};
+
+// hobbies
+app.get('/api/hobbies', function(req, res) {
     // ?order=desc, ?order=asc
     console.log("/hobbies", req.params, req.query);
-    if (req.query.order === "desc") {
-        hobbies.sort();
-    } else if (req.query.order === "asc") {
-        hobbies.sort();
-        hobbies.reverse();
-    }
-    res.send(JSON.stringify(hobbies));
+    adSort(hobbies, req.query.order);
+    res.json(hobbies);
+    // res.send(JSON.stringify(hobbies));
 });
 
-app.post('/hobbies', function(req, res) {
+app.post('/api/hobbies', function(req, res) {
     hobbies.push(req.body.hobby);
-    res.send(JSON.stringify(hobbies));
+    res.json(hobbies);
+    // res.send(JSON.stringify(hobbies));
 });
 
 
-app.get('/occupations', function(req, res) {
+// occupations
+app.get('/api/occupations', function(req, res) {
     // ?order=desc, ?order=asc
-    if (req.query.order === "desc") {
-        occupations.sort();
-    } else if (req.query.order === "asc") {
-        occupations.sort();
-        occupations.reverse();
-    }
-    res.send(JSON.stringify(occupations));
+    adSort(occupations, req.query.order);
+    // if (req.query.order === "desc") {
+    //     occupations.sort();
+    // } else if (req.query.order === "asc") {
+    //     occupations.sort();
+    //     occupations.reverse();
+    // }
+    res.json(occupations);
+    // res.send(JSON.stringify(occupations));
 });
 
-app.get('/occupations/latest', function(req, res) {
+app.post('/api/occupations', function(req, res) {
+    occupations.push(req.body.occupation);
+    res.json(occupations);
+    // res.send(JSON.stringify(occupations));
+});
+
+app.get('/api/occupations/latest', function(req, res) {
     res.send(me.latestOccupation);
 });
 
-app.post('/occupations', function(req, res) {
-    occupations.push(req.body.occupation);
-    res.send(JSON.stringify(occupations));
-});
-
-app.put('/occupations/latest/:occupation', function(req, res) {
+app.put('/api/occupations/latest/:occupation', function(req, res) {
     me.latestOccupation = req.params.occupation;
     res.send(me.latestOccupation);
 });
 
+
+// skills
 function getSelectedSkills(experience) {
     if (experience) {
         var selectedSkills = [];
@@ -113,25 +146,32 @@ function getSelectedSkills(experience) {
     return skills;
 }
 
-
-app.get('/skills', function(req, res) {
+app.get('/api/skills', function(req, res) {
     // ?experience=Intermediate
     console.log("/skills", req.params, req.query);
-    res.send(JSON.stringify(getSelectedSkills(req.query.experience)));
+    res.json(getSelectedSkills(req.query.experience));
+    // res.send(JSON.stringify(getSelectedSkills(req.query.experience)));
 });
 
-app.post('/skills', function(req, res) {
+app.post('/api/skills', function(req, res) {
     skills.push(req.body);
-    res.send(JSON.stringify(skills));
+    res.json(skills);
+    // res.send(JSON.stringify(skills));
 });
 
-// app.options('/', function(req, res) {
-//     res.send();
-// });
+
 
 var port = 8686;
-app.listen(port, function() {
-    console.log("listening at port", port);
+
+// following if API server only without serving html files
+// app.listen(port, function() {
+//     console.log("listening at port", port);
+// });
+
+server.on("request", app);
+
+server.listen(port, function() {
+    console.log("listening in address: ", server.address());
 });
 
 

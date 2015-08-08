@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Personal Api</title>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="MyController">
+        <p>Hello here {{test}} {{serviceTest}} </p>
+        <!-- <form> -->
+        <div>
+            <span>Name: </span>
+            <input type="text" ng-model="me.name">
+        </div>
+        <div>
+            <span>Location: </span>
+            <input type="text" ng-model="me.location">
+        </div>
+        <div>
+            <h5>My Hobbies:</h5>
+            <div>
+                <span>Sort: </span>
+                <select ng-model="sort.hobbies" ng-change="getMyHobbies()">
+                    <option value="asc">Asc</option>
+                    <option value="desc">Desc</option>
+                </select>
+            </div>
+            <ul>
+                <li ng-repeat="hobby in hobbies">
+                    {{hobby}}
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h5>My Occupations:</h5>
+            <div>
+                <span>Sort: </span>
+                <select ng-model="sort.occupations" ng-change="getMyOccupations()">
+                    <option value="asc">Asc</option>
+                    <option value="desc">Desc</option>
+                </select>
+            </div>
+            <ul>
+                <li ng-repeat="occupation in occupations">
+                    {{occupation}}
+                </li>
+            </ul>
+        </div>
+        <div>
+            <span>Latest Occupation: </span>
+            <span>{{me.latestOccupation}}</span>
+        </div>
+        <div>
+            <h5>My Skills:</h5>
+            <div>
+                <span>At Skill Level: </span>
+                <select ng-model="skills.skillLevel" ng-change="getMySkills()">
+                    <option value="all">All Levels</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+            </div>  
+            <p ng-if="skills.data.length === 0">No Skills at this level</p>          
+            <ul>
+                <li ng-repeat="skill in skills.data">
+                    Skill: {{skill.name}}, Level: {{skill.experience}}
+                </li>
+            </ul>
+        </div>
+        <!-- </form> -->
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+    <script src="./app/app.js"></script>
+    <script src="./app/controller.js"></script>
+    <script src="./app/service.js"></script>
+</body>
+
+</html>

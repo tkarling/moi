@@ -1,9 +1,14 @@
 .pa-name-card {
-	height: 100px;
+	height: 120px;
 	min-height: 100px;
 }
 
 .mdl-card__title {
 	height: 50px;
+	font-size: 20px;
+}
+
+.pa-card-content {
+	padding: 0px 14px 14px 14px;
 }
 

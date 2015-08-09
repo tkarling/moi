@@ -16,11 +16,8 @@ angular.module("myApp")
             $scope.me = data;
         });
 
-        $scope.setMyName = function() {
+        $scope.setMyInfo = function() {
             myService.setMyName($scope.me.name);
-        }
-
-        $scope.setMyLocation = function() {
             myService.setMyLocation($scope.me.location);
         }
 

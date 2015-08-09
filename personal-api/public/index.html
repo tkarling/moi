@@ -3,89 +3,121 @@
 
 <head>
     <title>Personal Api</title>
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 
 <body ng-app="myApp">
-    <div ng-controller="MyController">
-        <p>Hello here {{test}} {{serviceTest}} </p>
-        <div>
-            <span>Name: </span>
-            <input type="text" ng-model="me.name">
-            <button ng-click="setMyName()">Save</button>
-        </div>
-        <div>
-            <span>Location: </span>
-            <input type="text" ng-model="me.location">
-            <button ng-click="setMyLocation()">Save</button>
-        </div>
-        <div>
-            <h5>My Hobbies:</h5>
-            <div>
-                <span>Sort: </span>
-                <select ng-model="sort.hobbies" ng-change="getMyHobbies()">
-                    <option value="asc">Asc</option>
-                    <option value="desc">Desc</option>
-                </select>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout-title">Personal API</span>
             </div>
-            <form ng-submit="addHobby()">
-                <span>Add Hobby: </span>
-                <input type="text" placeholder="new hobby" ng-model="newHobby">
-            </form>
-            <ul>
-                <li ng-repeat="hobby in hobbies">
-                    {{hobby}}
-                </li>
-            </ul>
-        </div>
-        <div>
-            <h5>My Occupations:</h5>
-            <div>
-                <span>Sort: </span>
-                <select ng-model="sort.occupations" ng-change="getMyOccupations()">
-                    <option value="asc">Asc</option>
-                    <option value="desc">Desc</option>
-                </select>
+        </header>
+        <div class="mdl-layout__content" ng-controller="MyController">
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-desktop mdl-card mdl-shadow--2dp pa-name-card">
+                    <div class="mdl-card__title">
+                        <h4 class="mdl-card__title-text">Name: 
+                    <input type="text" ng-model="me.name">
+                    </h4>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button class="mdl-button mdl-button--colored mdl-js-button" ng-click="setMyName()">save</button>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-desktop mdl-card mdl-shadow--2dp pa-name-card">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Location: 
+                       <input type="text" ng-model="me.location">
+                       </h2>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button class="mdl-button mdl-button--colored mdl-js-button" ng-click="setMyLocation()">save</button>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-desktop mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h5 class="mdl-card__title">My Hobbies:</h5>
+                    </div>
+                    <div class="mdl-card__menu">
+                        <select ng-model="sort.hobbies" ng-change="getMyHobbies()">
+                            <option value="asc">Asc</option>
+                            <option value="desc">Desc</option>
+                        </select>
+                    </div>
+                    <ul>
+                        <li ng-repeat="hobby in hobbies">
+                            {{hobby}}
+                        </li>
+                    </ul>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <form ng-submit="addHobby()">
+                            <span>Add Hobby: </span>
+                            <input type="text" placeholder="new hobby" ng-model="newHobby">
+                        </form>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--6-col-desktop mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h5 class="mdl-card__title">My Skills:</h5>
+                    </div>
+                    <div class="mdl-card__menu">
+                        <!-- <span>At Skill Level: </span> -->
+                        <select ng-model="skills.skillLevel" ng-change="getMySkills()">
+                            <option value="all">All Levels</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                        </select>
+                    </div>
+                    <p ng-if="skills.data.length === 0">No Skills at this level</p>
+                    <ul>
+                        <li ng-repeat="skill in skills.data">
+                            Skill: {{skill.name}}, Level: {{skill.experience}}
+                        </li>
+                    </ul>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <form ng-submit="addSkill()">
+                            <span>Add Skill: </span>
+                            <div style="display: inline-block">
+                                <input type="text" placeholder="new skill" ng-model="newSkill.name">
+                                <select ng-model="newSkill.experience">
+                                    <option>Beginner</option>
+                                    <option>Intermediate</option>
+                                    <option>Advanced</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col mdl-card mdl-shadow--2dp">
+                    <div class="mdl-card__title">
+                        <h5 class="mdl-card__title">My Occupations:</h5>
+                    </div>
+                    <div class="mdl-card__menu">
+                        <select ng-model="sort.occupations" ng-change="getMyOccupations()">
+                            <option value="asc">Asc</option>
+                            <option value="desc">Desc</option>
+                        </select>
+                    </div>
+                    <ul>
+                        <li ng-repeat="occupation in occupations">
+                            {{occupation.title}} <span ng-if="occupation.latest">(latest)</span>
+                            <button ng-if="updatingLatest" class="mdl-button mdl-js-button mdl-button--colored" ng-click="setLatestOccupation(occupation.title)">select as latest</button>
+                        </li>
+                    </ul>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <form style="float:left" ng-submit="addOccupation()">
+                            <span>Add Occupation: </span>
+                            <input type="text" placeholder="new occupation" ng-model="newOccupation">
+                        </form>
+                        <button style="float:right" class="mdl-button mdl-button--colored" ng-click="updatingLatest = !updatingLatest">Update Latest</button>
+                    </div>
+                </div>
             </div>
-            <form ng-submit="addOccupation()">
-                <span>Add Occupation: </span>
-                <input type="text" placeholder="new occupation" ng-model="newOccupation">
-            </form>
-            <ul>
-                <li ng-repeat="occupation in occupations">
-                    {{occupation}}
-                </li>
-            </ul>
-        </div>
-        <div>
-            <span>Latest Occupation: </span>
-            <span>{{me.latestOccupation}}</span>
-        </div>
-        <div>
-            <h5>My Skills:</h5>
-            <div>
-                <span>At Skill Level: </span>
-                <select ng-model="skills.skillLevel" ng-change="getMySkills()">
-                    <option value="all">All Levels</option>
-                    <option>Beginner</option>
-                    <option>Intermediate</option>
-                    <option>Advanced</option>
-                </select>
-            </div>
-            <form ng-submit="addSkill()">
-                <span>Add Skill: </span>
-                <input type="text" placeholder="new skill" ng-model="newSkill.name">
-                <select ng-model="newSkill.experience">
-                    <option>Beginner</option>
-                    <option>Intermediate</option>
-                    <option>Advanced</option>
-                </select>
-            </form>
-            <p ng-if="skills.data.length === 0">No Skills at this level</p>
-            <ul>
-                <li ng-repeat="skill in skills.data">
-                    Skill: {{skill.name}}, Level: {{skill.experience}}
-                </li>
-            </ul>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>

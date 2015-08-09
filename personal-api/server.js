@@ -1,5 +1,5 @@
 'use strict';
-var http = require("http");
+var http = require("http");  
 var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
@@ -32,7 +32,7 @@ app.use("/", cors());
 
 
 // DATA =========
-var hobbies = ["hiking", "reading", "puzzles"];
+var hobbies = ["hiking", "reading", "puzzles"]; 
 var occupations = ["Project Manager", "SW Team Lead", "Customer Trainer", "SW developer"];
 var skills = [{
     id: 1,
@@ -54,6 +54,7 @@ var me = {
     location: "San Diego, CA",
     latestOccupation: occupations[0]
 };
+console.log("me", me);
 // END DATA =========
 
 // name
@@ -106,7 +107,7 @@ app.route('/api/hobbies')
 
 
 // occupations
-app.route('/api/occupations')
+app.route('/api/occupations') 
 .get(function(req, res) {
     // ?order=desc, ?order=asc
     adSort(occupations, req.query.order);
@@ -122,12 +123,12 @@ app.route('/api/occupations')
 });
 
 app.get('/api/occupations/latest', function(req, res) {
-    res.send(me.latestOccupation);
+    res.json(me.latestOccupation);
 });
 
 app.put('/api/occupations/latest/:occupation', function(req, res) {
     me.latestOccupation = req.params.occupation;
-    res.send(me.latestOccupation);
+    res.json(me.latestOccupation);
 });
 
 

@@ -70,6 +70,12 @@ angular.module("myApp")
             });
         };
 
+        this.setLatestOccupation = function(occupation) {
+            return $http.put(url + "/occupations/latest/" + occupation).then(function(response) {
+            	return response.data;
+            })
+        };
+
         this.getMySkills = function(skillLevel) {
             var sendUrl = (skillLevel === "all") ? url + "/skills" : url + "/skills?experience=" + skillLevel;
             // console.log("getMySkills: sendUrl", sendUrl);
@@ -80,9 +86,9 @@ angular.module("myApp")
         };
 
         this.addSkill = function(newSkill) {
-        	// console.log("this.addSkill", newSkill);
+            // console.log("this.addSkill", newSkill);
             return $http.post(url + "/skills", newSkill).then(function(response) {
-            	// console.log("this.addSkill", response);
+                // console.log("this.addSkill", response);
                 return response.data;
             });
         };

@@ -1,5 +1,5 @@
 .pa-name-card {
-	height: 120px;
+	height: 130px;
 	min-height: 100px;
 }
 
@@ -9,6 +9,6 @@
 }
 
 .pa-card-content {
-	padding: 0px 14px 14px 14px;
+	padding: 0px 14px 14px 32px;
 }
 

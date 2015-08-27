@@ -54,6 +54,19 @@ chatty3/node_modules/*/*/*/*.*
 personal-api/node_modules/*/*
 personal-api/node_modules/*/*/*.*
 personal-api/node_modules/*/*/*/*.*
+personal-api/*.log
+
+nodePractice/node_modules/*/*
+nodePractice/node_modules/*/*/*.*
+nodePractice/node_modules/*/*/*/*.*
+nodePractice/*.log
 
 */*.log
-personal-api/*.log
+
+FacebookViewer/node_modules/*
+
+mini-birds/node_modules/*
+
+simpsons-mongoose/node_modules/*
+
+FacebookViewer/keys.js

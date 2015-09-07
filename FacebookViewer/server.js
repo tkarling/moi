@@ -1,6 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-// var cors = require("cors");
+var cors = require("cors");
 
 // passport specific setup
 var session = require('express-session');
@@ -15,10 +15,11 @@ var app = express();
 var port = 3039;
 
 // MIDDLEWARE
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-// app.use(cors());
+app.use(cors());
 
 app.use(session({
     secret: 'some-random-string'

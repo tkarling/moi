@@ -1,0 +1,62 @@
+<html ng-app="myApp">
+<head>
+	<title></title>
+</head>
+<body ng-controller="MyController">
+	{{test}}
+	<div>
+		<a href="/auth/facebook">Login w Facebook</a>
+	</div>
+	<button ng-click="getMyInfo()">Get my Info</button>
+	<p>{{myInfo.id}} {{myInfo.displayName}}</p>
+
+	<!-- <div ng-if="!loggedIn" class="container">
+
+	    <div class="jumbotron text-center">
+	        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+
+	        <p>Login or Register with:</p>
+
+	        <a href="/auth/facebook" class="btn btn-primary">
+	        	<span class="fa fa-facebook"></span> Facebook</a>
+
+	    </div>
+
+	</div>
+
+	<div ng-if="loggedIn" class="container">
+
+    <div class="page-header text-center">
+        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+    </div>
+
+    <div class="row"> -->
+
+        <!-- FACEBOOK INFORMATION -->
+        <!-- <div class="col-sm-6">
+            <div class="well">
+                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
+
+                    <p>
+                        <strong>id</strong>: <%= user.facebook.id %><br>
+                        <strong>token</strong>: <%= user.facebook.token %><br>
+                        <strong>email</strong>: <%= user.facebook.email %><br>
+                        <strong>name</strong>: <%= user.facebook.name %>
+                    </p>
+
+            </div>
+        </div>
+
+    </div> -->
+
+
+
+	<!-- Angular -->
+    <script src="https:/cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.js"></script>
+
+     <!-- this app -->
+    <script src="./app/app.js"></script>
+    <script src="./app/controller.js"></script>
+</body>
+</html>

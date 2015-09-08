@@ -1,0 +1,18 @@
+{
+  "name": "reactmini2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./app/App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tuija",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^0.13.3"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.13.2",
+    "webpack": "^1.12.1"
+  }
+}

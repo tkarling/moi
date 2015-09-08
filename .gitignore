@@ -73,4 +73,6 @@ FacebookViewer/keys.js
 
 reactMini/node_modules/*
 
-reactMini2/*
+reactMiniCont/*
+
+reactMini2/node_modules/*
